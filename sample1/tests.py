@@ -1,4 +1,4 @@
-from django.core.urlresolvers import reverse
+from unittest.mock import patch
 from django.test import TestCase
 from sample1.models import Information
 from django.test.client import Client
@@ -48,3 +48,15 @@ class AddNewInformationTestCase(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'add new information')
+
+    def test_add_new_informatin_with_post_method_information_save(self):
+        full_name = 'pouria eini'
+
+        with patch.object(Information, 'save') as information_mock_save_method:
+            response = self.client.post(self.url, data={
+                "full_name": full_name
+            })
+            self.assertEqual(response.status_code, 200)
+            self.assertContains(response, full_name)
+            self.assertContains(response, 'index')
+        assert information_mock_save_method.called
