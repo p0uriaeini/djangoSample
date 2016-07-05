@@ -13,3 +13,9 @@ def add_new_information(request):
             return render(request, 'information/add_new_information.html')
     else:
         return render(request, 'information/add_new_information.html', {})
+
+
+def get_list_of_informaion(request):
+    informations = Information.objects.all()
+
+    return render(request, 'information/informaiton_list.html', {'informations': informations})

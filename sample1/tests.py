@@ -60,3 +60,16 @@ class AddNewInformationTestCase(TestCase):
             self.assertContains(response, full_name)
             self.assertContains(response, 'index')
         assert information_mock_save_method.called
+
+
+class GetInformaionList(TestCase):
+    def test_get_list_of_information(self):
+        for _ in range(0, 10):
+            Information.objects.create(full_name='full_name %s' % _)
+        informations = Information.objects.all()
+        response = Client().get('/information/list/')
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'information list')
+        for information in informations:
+            self.assertContains(response, information.full_name)
+            # self.assertContains(response, information.create_date)

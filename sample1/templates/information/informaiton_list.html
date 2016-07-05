@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>information list</title>
+</head>
+<body>
+<ul>
+    {% for information in informations %}
+        <li>
+            {{ information.full_name }} - {{ information.create_date }}
+        </li>
+    {% endfor %}
+</ul>
+</body>
+</html>
