@@ -43,9 +43,8 @@ class AddNewInformationTestCase(TestCase):
         self.assertContains(response, 'index')
         self.assertContains(response, full_name)
 
-    # def test_add_new_information_with_post_mehtod_and_without_full_name(self):
-    #     # import pdb;pdb.set_trace()
-    #     response = self.client.post(self.url, data=None)
-    #
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertContains(response, 'add new information')
+    def test_add_new_information_with_post_mehtod_and_without_full_name(self):
+        response = self.client.post(self.url, data=None)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'add new information')
